@@ -322,7 +322,13 @@ class WeatherQuery(BaseAction):
 
 2.2.2 获取 API KEY   
 
-为了获得稳定的天气查询服务，我们首先要获取 API KEY。首先打开 `https://dev.qweather.com/docs/api/` 后，点击右上角控制台。（如下图所示）   
+为了获得稳定的天气查询服务，我们首先要获取 API KEY。首先打开 `https://dev.qweather.com/docs/api/` 后，点击右上角控制台。
+
+进入控制台后，点击左侧项目管理，然后点击右上角创建项目以创建新项目。   
+
+输入相关项目名称，选择免费订阅，Web API 以及输入 key 的名称。   
+
+接下来回到项目管理页面，查看我们刚刚创建的 key，并且复制好以供2.3节中使用。（如下图所示）    
 
 ![](./Agent12.1.png) 
 
