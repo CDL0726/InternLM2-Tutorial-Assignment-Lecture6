@@ -491,6 +491,12 @@ cv2.imwrite('/root/agent/road_detection_direct.jpg', image)
 
    
 2. 完成 AgentLego 直接使用部分，并在作业中上传截图。文档可见 [直接使用 AgentLego](agentlego.md#1-直接使用-agentlego)。
+
+> [!TIP]
+> Dennis作业，详见笔记 **3.1 直接使用 AgentLego**, 截图如下：
+
+![](./Agent13.3.png)     
+
    
 ## 进阶作业
 
@@ -514,9 +520,11 @@ cv2.imwrite('/root/agent/road_detection_direct.jpg', image)
 
 ### 算法方向
 
-1. 在 Lagent 或 AgentLego 中实现 RAG 工具，实现智能体与知识库的交互。
-2. 基于 Lagent 或 AgentLego 实现工具的多轮调用，完成复杂任务。如：智能体调用翻译工具，再调用搜索工具，最后调用生成工具，完成一个完整的任务。
-3. ...
+1. 在 Lagent 中实现 RAG 工具，实现智能体与知识库的交互。
+
+直接上传PDF压缩文件，然后让智能根据上传的文件来回答问题，并列出回答所引用的资料，效果如下：
+
+![](./Agent11.3.png)  
 
 ### 应用方向
 
