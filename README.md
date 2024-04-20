@@ -594,6 +594,12 @@ ssh -CNg -L 7860:127.0.0.1:7860 -L 23333:127.0.0.1:23333 root@ssh.intern-ai.org.
 ## 进阶作业
 
 1. 完成 AgentLego WebUI 使用，并在作业中上传截图。文档可见 [AgentLego WebUI](agentlego.md#2-作为智能体工具使用)。
+
+> [!TIP]
+> Dennis作业，详见笔记 **3.2 作为智能体工具使用**, 截图如下：
+
+![](./Agent14.6.1.png) 
+
 2. 使用 Lagent 或 AgentLego 实现自定义工具并完成调用，并在作业中上传截图。文档可见：
    - [用 Lagent 自定义工具](lagent.md#2-用-lagent-自定义工具)
    - [用 AgentLego 自定义工具](agentlego.md#3-用-agentlego-自定义工具)
@@ -621,7 +627,10 @@ ssh -CNg -L 7860:127.0.0.1:7860 -L 23333:127.0.0.1:23333 root@ssh.intern-ai.org.
 
 ### 应用方向
 
-1. 基于 Lagent 或 AgentLego 实现一个客服智能体，帮助用户解决问题。
-2. 基于 Lagent 或 AgentLego 实现一个智能体，实现艺术创作，如生成图片、视频、音乐等。
-3. ...
+1. 基于 Lagent 或 AgentLego 实现一个Healthcare Agent 医疗健康智能体，帮助用户解决健康管理问题。
+
+   产品架构如下图：
+
+   ![](./Agent14.4.png) 
+   
 
