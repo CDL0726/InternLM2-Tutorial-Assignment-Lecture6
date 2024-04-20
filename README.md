@@ -378,7 +378,7 @@ ssh -CNg -L 7860:127.0.0.1:7860 -L 23333:127.0.0.1:23333 root@ssh.intern-ai.org.
 
 详细文档可以访问：[AgentLego：组装智能体“乐高”](https://github.com/InternLM/Tutorial/blob/camp2/agent/agentlego.md)   
 
-3.1 直接使用 AgentLego     
+**3.1 直接使用 AgentLego**     
 
 **目标检测工具**
 
@@ -463,6 +463,99 @@ cv2.imwrite('/root/agent/road_detection_direct.jpg', image)
 
 **结果:**
 ![](./Agent13.3.png)   
+
+
+**3.2 作为智能体工具使用**   
+
+3.2.1 修改相关文件   
+
+由于 AgentLego 算法库默认使用 InternLM2-Chat-20B 模型，因此我们首先需要修改 /root/agent/agentlego/webui/modules/agents/lagent_agent.py 文件的第 105行位置，将 internlm2-chat-20b 修改为 internlm2-chat-7b，即如下图：   
+
+![](./Agent14.1.png)    
+
+3.2.2 使用 LMDeploy 部署    
+
+由于 AgentLego 的 WebUI 需要用到 LMDeploy 所启动的 api_server，因此我们首先按照下图指示在 vscode terminal 中执行如下代码使用 LMDeploy 启动一个 api_server。    
+
+```
+conda activate agent
+lmdeploy serve api_server /root/share/new_models/Shanghai_AI_Laboratory/internlm2-chat-7b \
+                            --server-name 127.0.0.1 \
+                            --model-name internlm2-chat-7b \
+                            --cache-max-entry-count 0.1
+```
+
+3.2.3 启动 AgentLego WebUI    
+
+接下来我们按照下图指示新建一个 terminal 以启动 AgentLego WebUI。在新建的 terminal 中执行如下指令：    
+
+```
+conda activate agent
+cd /root/agent/agentlego/webui
+python one_click.py
+```
+
+在等待 LMDeploy 的 api_server 与 AgentLego WebUI 完全启动后（如下图所示），在本地进行端口映射，将 LMDeploy api_server 的23333端口以及 AgentLego WebUI 的7860端口映射到本地。可以执行：   
+
+```
+ssh -CNg -L 7860:127.0.0.1:7860 -L 23333:127.0.0.1:23333 root@ssh.intern-ai.org.cn -p 44315
+```
+
+|LMDeploy api_server|AgentLego WebUI|
+|---|---|   
+|![](./Agent14.2.png) |![](./Agent14.3.png) |   
+
+3.2.4 使用 AgentLego WebUI    
+
+接下来在本地的浏览器页面中打开 http://localhost:7860 以使用 AgentLego WebUI。首先来配置 Agent，如下图所示。    
+
+  1.点击上方 Agent 进入 Agent 配置页面。（如①所示）
+  2.点击 Agent 下方框，选择 New Agent。（如②所示）    
+  3.选择 Agent Class 为 lagent.InternLM2Agent。（如③所示）    
+  4.输入模型 URL 为 http://127.0.0.1:23333 。（如④所示）    
+  5.输入 Agent name，自定义即可，图中输入了 internlm2。（如⑤所示）    
+  6.点击 save to 以保存配置，这样在下次使用时只需在第2步时选择 Agent 为 internlm2 后点击 load 以加载就可以了。（如⑥所示）    
+  7.点击 load 以加载配置。（如⑦所示）    
+
+  ![](./Agent14.4.1.png) 
+
+  自己做好的效果如下图：    
+
+![](./Agent14.4.png)     
+
+然后配置工具，如下图所示。    
+
+  1. 点击上方 Tools 页面进入工具配置页面。（如①所示）
+  2. 点击 Tools 下方框，选择 New Tool 以加载新工具。（如②所示）
+  3. 选择 Tool Class 为 ObjectDetection。（如③所示）
+  4. 点击 save 以保存配置。（如④所示）
+
+  ![](./Agent14.5.png) 
+
+  自己作业的做出的效果如下图：    
+  
+   ![](./Agent14.5.1.png)    
+   
+
+等待工具加载完成后，点击上方 Chat 以进入对话页面。在页面下方选择工具部分只选择 ObjectDetection 工具，如下图所示。为了确保调用工具的成功率，请在使用时确保仅有这一个工具启用。   
+
+ ![](./Agent14.5.2.png)    
+
+接下来就可以愉快地使用 Agent 了。点击右下角文件夹以上传图片，上传图片后输入指令并点击 generate 以得到模型回复。如下图所示，我们上传了 demo 图片，模型成功地调用了工具，并详细地告诉了我们图中的内容。    
+
+![](./Agent14.6.png)     
+
+继续测试，可以识别路上物体：
+
+![](./Agent14.6.1.png)  
+
+不能识别水中的物体：
+
+![](./Agent14.6.2.png)     
+
+
+
+
 
 
 ### 4. Agent 工具能力微调   
