@@ -1,4 +1,4 @@
-# InternLM2-Tutorial-Assignment-Lecture6
+![image](https://github.com/CDL0726/InternLM2-Tutorial-Assignment-Lecture6/assets/143588328/90b1ee10-9587-4097-aab9-9325d6719e5d)# InternLM2-Tutorial-Assignment-Lecture6
 # Lagent & AgentLego 智能体应用搭建    
 2024.4.17   Lagent&AgentLego 核心贡献者 樊奇   
 
@@ -376,7 +376,94 @@ ssh -CNg -L 7860:127.0.0.1:7860 -L 23333:127.0.0.1:23333 root@ssh.intern-ai.org.
 
 在这一部分中，我们将直接使用 AgentLego 工具，体验 AgentLego 的 WebUI，以及基于 AgentLego 自定义工具并体验自定义工具的效果。    
 
-详细文档可以访问：[AgentLego：组装智能体“乐高”](https://github.com/InternLM/Tutorial/blob/camp2/agent/agentlego.md)
+详细文档可以访问：[AgentLego：组装智能体“乐高”](https://github.com/InternLM/Tutorial/blob/camp2/agent/agentlego.md)   
+
+3.1 直接使用 AgentLego     
+
+**目标检测工具**
+
+首先下载 demo 文件：   
+```
+cd /root/agent
+wget http://download.openmmlab.com/agentlego/road.jpg
+```
+
+由于 AgentLego 在安装时并不会安装某个特定工具的依赖，因此我们接下来准备安装**目标检测工具**运行时所需依赖。 
+
+AgentLego 所实现的目标检测工具是基于 mmdet (MMDetection) 算法库中的 RTMDet-Large 模型，因此我们首先安装 mim，然后通过 mim 工具来安装 mmdet。这一步所需时间可能会较长，请耐心等待。    
+
+```
+conda activate agent
+pip install openmim==0.3.9
+mim install mmdet==3.3.0
+```
+
+然后通过 `touch /root/agent/direct_use.py`（大小写敏感）的方式在 /root/agent 目录下新建 `direct_use.py` 以直接使用目标检测工具，direct_use.py 的代码如下：    
+
+```
+import re
+
+import cv2
+from agentlego.apis import load_tool
+
+# load tool
+tool = load_tool('ObjectDetection', device='cuda')
+
+# apply tool
+visualization = tool('/root/agent/road.jpg')
+print(visualization)
+
+# visualize
+image = cv2.imread('/root/agent/road.jpg')
+
+preds = visualization.split('\n')
+pattern = r'(\w+) \((\d+), (\d+), (\d+), (\d+)\), score (\d+)'
+
+for pred in preds:
+    name, x1, y1, x2, y2, score = re.match(pattern, pred).groups()
+    x1, y1, x2, y2, score = int(x1), int(y1), int(x2), int(y2), int(score)
+    cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 1)
+    cv2.putText(image, f'{name} {score}', (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 1)
+
+cv2.imwrite('/root/agent/road_detection_direct.jpg', image)
+```
+
+此时文件树结构如下：   
+
+```
+/root/agent
+├── agentlego
+│   ├── agentlego
+│   ├── docs
+│   ├── examples
+│   ├── LICENSE
+│   └── ...
+├── lagent
+│   ├── docs
+│   ├── examples
+│   ├── lagent
+│   ├── LICENSE
+│   └── ...
+├── Tutorial
+│   ├── assets
+│   ├── agent
+│   ├── helloword
+│   ├── huixiangdou
+│   └── ...
+├── direct_use.py
+└── road.jpg
+```
+
+接下来在执行 `python /root/agent/direct_use.py` 以进行推理。在等待 RTMDet-Large 权重下载并推理完成后，我们就可以看到如下输出以及一张位于 /root/agent 名为 road_detection_direct.jpg 的图片：    
+
+![](./Agent13.1.png)    
+
+**原图:**
+![](./Agent13.2.png)    
+
+**结果:**
+![](./Agent13.3.png)   
+
 
 ### 4. Agent 工具能力微调   
 
