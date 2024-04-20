@@ -53,12 +53,6 @@
 
 ![](./Agent3.png)       
 
-What's Lagent?      
-
-Lagent is a lightweight open-source framework that allows users to efficiently build large language model(LLM)-based agents. It also provides some typical tools to augment LLM. The overview of our framework is shown below:   
-
-![](./Agent3.1.png) 
-
 ### 智能体范式     
 - AutoGPT
 - ReWoo
