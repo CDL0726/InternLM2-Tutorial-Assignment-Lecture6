@@ -51,7 +51,13 @@
      
   3. 动作： 利用并执行工具以影响环境。工具可能包括文本的检索、调用相关API、操控机械臂等。
 
-![](./Agent3.png)     
+![](./Agent3.png)       
+
+What's Lagent?      
+
+Lagent is a lightweight open-source framework that allows users to efficiently build large language model(LLM)-based agents. It also provides some typical tools to augment LLM. The overview of our framework is shown below:   
+
+![](./Agent3.1.png) 
 
 ### 智能体范式     
 - AutoGPT
@@ -385,5 +391,55 @@ ssh -CNg -L 7860:127.0.0.1:7860 -L 23333:127.0.0.1:23333 root@ssh.intern-ai.org.
 
 # 第6课 作业        
 
+> [!TIP]
+> 结营必做基础作业；优秀学员或进入对应 SIG 需完成进阶作业。
 
+## 基础作业
+
+1. 完成 Lagent Web Demo 使用，并在作业中上传截图。文档可见 [Lagent Web Demo](lagent.md#1-lagent-web-demo)
+
+> [!TIP]
+> Dennis作业，详见笔记 **2.1 Lagent Web Demo**, 截图如下：
+
+![](./Agent11.1.png)   
+![](./Agent11.3.png)
+
+还可以直接上传PDF压缩文件，然后让智能根据上传的文件来回答问题，并列出回答所引用的资料，效果如下：   
+
+![](./Agent11.3.png)
+
+   
+2. 完成 AgentLego 直接使用部分，并在作业中上传截图。文档可见 [直接使用 AgentLego](agentlego.md#1-直接使用-agentlego)。
+   
+## 进阶作业
+
+1. 完成 AgentLego WebUI 使用，并在作业中上传截图。文档可见 [AgentLego WebUI](agentlego.md#2-作为智能体工具使用)。
+2. 使用 Lagent 或 AgentLego 实现自定义工具并完成调用，并在作业中上传截图。文档可见：
+   - [用 Lagent 自定义工具](lagent.md#2-用-lagent-自定义工具)
+   - [用 AgentLego 自定义工具](agentlego.md#3-用-agentlego-自定义工具)
+  
+> [!TIP]
+> Dennis作业，详见笔记 **2.2 用 Lagent 自定义工具**, 截图如下：
+
+![](./Agent12.1.png)   
+![](./Agent12.2.png) 
+
+体验下来，只能查询当天的天气，不能查未来或是过去的天气：
+
+![](./Agent12.3.png) 
+
+
+## 大作业选题
+
+### 算法方向
+
+1. 在 Lagent 或 AgentLego 中实现 RAG 工具，实现智能体与知识库的交互。
+2. 基于 Lagent 或 AgentLego 实现工具的多轮调用，完成复杂任务。如：智能体调用翻译工具，再调用搜索工具，最后调用生成工具，完成一个完整的任务。
+3. ...
+
+### 应用方向
+
+1. 基于 Lagent 或 AgentLego 实现一个客服智能体，帮助用户解决问题。
+2. 基于 Lagent 或 AgentLego 实现一个智能体，实现艺术创作，如生成图片、视频、音乐等。
+3. ...
 
