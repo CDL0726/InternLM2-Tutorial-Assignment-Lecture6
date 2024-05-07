@@ -631,6 +631,7 @@ ssh -CNg -L 7860:127.0.0.1:7860 -L 23333:127.0.0.1:23333 root@ssh.intern-ai.org.
 
    产品架构如下图：
 
-   ![](./Agent14.4.png) 
+   ![](./Agent14.4.png)
+   ![](./Agent14.4.2.png) 
    
 
