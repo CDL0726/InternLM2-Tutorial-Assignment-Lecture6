@@ -146,7 +146,8 @@ conda activate agent
 pip install lmdeploy==0.3.0
 ```
 
-1.4 准备 Tutorial    
+1.4 准备 Tutorial       
+
 由于后续的 Demo 需要用到 tutorial 已经写好的脚本，因此我们需要将 tutorial 通过 git clone 的方法准备好，以备后续使用：   
 
 ```
@@ -192,7 +193,7 @@ ssh -CNg -L 7860:127.0.0.1:7860 -L 23333:127.0.0.1:23333 root@ssh.intern-ai.org.
 
 |LMDeploy|Lagent Web Demo|
 |---|---|
-|![](./Agent10.1.png)|![](./Agent10.1.png)|   
+|![](./Agent10.1.png)|![](./Agent10.2.png)|   
 
 接下来在本地的浏览器页面中打开 `http://localhost:7860` 以使用 Lagent Web Demo。首先输入模型 IP 为 `127.0.0.1:23333`，在输入完成后按下回车键以确认。并选择插件为 `ArxivSearch`，以让模型获得在 arxiv 上搜索论文的能力。    
 
